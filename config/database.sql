@@ -30,6 +30,21 @@ idmarca				INT,
 CONSTRAINT fk_marca FOREIGN KEY (idmarca) REFERENCES MARCAS(idmarca)
 )ENGINE=INNODB;
 
+CREATE VIEW vista_productos AS
+SELECT
+		PD.idproducto,
+        CT.categoria,
+        SC.subcategoria,
+        MC.marca,
+        PD.precio,
+        PD.modelo,
+        PD.fechaRegistro,
+        PD.fotografia
+FROM PRODUCTOS PD
+INNER JOIN MARCAS MC ON PD.idmarca=MC.idmarca
+INNER JOIN SUBCATEGORIAS SC ON PD.idsubcategoria=SC.idsubcategoria
+INNER JOIN CATEGORIAS CT ON PD.idcategoria=CT.idcategoria;
+
 INSERT INTO CATEGORIAS(categoria)VALUES("vestimenta");
 INSERT INTO SUBCATEGORIAS(subcategoria,idcategoria)VALUES("pantalones",1);
 INSERT INTO MARCAS(marca,idsubcategoria)VALUES("LEVI'S",1);

@@ -1,0 +1,97 @@
+<%- include('./partials/header') %>
+
+<div class="row g-2">
+  <div class="col-md-4 mb-2" >
+    <div class="form-floating">
+      <select name="marcas" id="marcas" class="form-select" required>
+        <option value="" selected disabled>Seleccione</option>
+      </select>
+      <label for="form-label">marcas</label>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-2">
+    <div class="form-floating">
+      <input type="text" id="producto" name="producto" class="form-control" placeholder="busque producto" required>
+      <label for="form-label">Producto</label>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-2">
+    <div class="form-floating">
+      <select name="idproducto" id="idproducto" class="form-select" required>
+        <option value="" selected disabled>Seleccione</option>
+        <option value="">Mayor a Menor</option>
+        <option value="">Menor a Mayor</option>
+
+      </select>
+      <label for="form-label">id</label>
+    </div>
+  </div>
+
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-striped w-100">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CATEGORIA</th>
+        <th>SUBCATEGORIA</th>
+        <th>MARCA</th>
+        <th>PRECIO</th>
+        <th>MODELO</th>
+        <th>FECHA REGISTRO</th>
+        <th>FOTOGRAFIA</th>
+        <th>ACCIONES</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% productos.forEach(producto => { %>
+        <tr>
+          <td><%= producto.idproducto %></td>
+          <td><%= producto.categoria %></td>
+          <td><%= producto.subcategoria%></td>
+          <td><%= producto.marca%></td>
+          <td><%= producto.precio %></td>
+          <td><%= producto.modelo %></td>
+          <td><%= producto.fechaRegistro.toISOString().split('T')[0] %></td>
+          <td><%= producto.fotografia %></td>
+
+          <td>
+            <a href="/edit/<%= producto.idproducto %>" class="btn btn-sm btn-info">Editar</a>
+            <a href="/delete/<%= producto.idproducto %>" class="btn btn-sm btn-danger delete">Eliminar</a>
+
+          </td>
+        </tr>
+      <%}) %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded",()=>{
+    const enlacesEliminar=document.querySelectorAll(".delete");
+    enlacesEliminar.forEach((enlace) => {
+    enlace.addEventListener("click",(event)=>{
+      event.preventDefault();
+      Swal.fire({
+        title:'Vehículos',
+        text:'¿Está seuro de ELIMINAR?',
+        icon:'question',
+        footer:'SENATI ING. SOFTWARE',
+        confirmButtonText:'Aceptar',
+        confirmButtonColor:'#2980b9',
+        showCancelButton:true,
+        cancelButtonText:'cancelar'
+      }).then((result)=>{
+        if(result.isConfirmed){
+          Window.location.href=event.target.getAttribute("href")
+        }
+      })//then()
+    })//addEventListener
+  })//forEach
+});//DOMCDontentLoaded
+</script>
+<%- include('./partials/footer') %>

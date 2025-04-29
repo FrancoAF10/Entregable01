@@ -1,0 +1,93 @@
+<%- include('./partials/header') %>
+
+<form action="/create" id="formulario-registrar" autocomplete="off" method="post">
+    <div class="card mt-5">
+
+        <div class="card-header"><strong>Registrar Producto</strong></div>
+
+        <div class="card-body">
+            
+            <div class="row g-2">
+
+                <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                        <select name="categoria" id="categoria" class="form-select" required>
+                            <option value="" selected disabled>Seleccione</option>
+                            <% CATEGORIAS.forEach(element => { %>
+                             <option value= "<%= element.idcategoria %>"><%= element.categoria %></option>
+                            <% }) %>
+                          </select>
+                          <label for="form-label">Categorias</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                        <select name="subcategoria" id="subcategoria" class="form-select" required>
+                            <option value="" selected disabled>Seleccione</option>
+                            <% SUBCATEGORIAS.forEach(element => { %>
+                             <option value= "<%= element.idsubcategoria %> "> <%= element.subcategoria %></option>
+                            <% }) %>
+                          </select>
+                          <label for="form-label">SubCategorias</label>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row g-2">
+
+                <div class="col-md-4 mb-2">
+                    <div class="form-floating">
+                        <select name="marca" id="marca" class="form-select" required>
+                            <option value="" selected disabled>Seleccione</option>
+                            <% MARCAS.forEach(element => { %>
+                             <option value= "<%= element.idmarca %> "> <%= element.marca %></option>
+                            <% }) %>
+                          </select>
+                          <label for="form-label">Marcas</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-2">
+                    <div class="form-floating">
+                        <input type="text" id="precio"  name="precio" class="form-control" placeholder="Precio" required> 
+                        <label for="form-label">Precio</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                            <div class="form-floating">
+                              <input type="text" id="modelo" name="modelo" class="form-control" placeholder="Modelo" required>
+                              <label for="form-label">Modelo</label>
+                            </div>
+                          </div>               
+            </div>
+
+            <div class="row g-2">
+
+                <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                        <input type="date" id="fechaRegistro"  name="fechaRegistro" class="form-control" placeholder="echa Registro" required> 
+                        <label for="form-label">Fecha Registro</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                        <input type="file" id="fotografia"  name="fotografia" class="form-control" placeholder="Fotografia" required> 
+                        <label for="form-label">Fotografia</label>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary">Registrar</button>
+            <a href="/" class="btn btn-sm btn-secondary">Cancelar</a>
+            </div>
+    </div>
+</form>
+
+<%- include('./partials/footer') %>

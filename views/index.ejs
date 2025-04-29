@@ -1,12 +1,24 @@
 <%- include('./partials/header') %>
 
-<div class="row g-2">
+<div class="row g-2 mt-5">
   <div class="col-md-4 mb-2" >
     <div class="form-floating">
       <select name="marcas" id="marcas" class="form-select" required>
         <option value="" selected disabled>Seleccione</option>
       </select>
       <label for="form-label">marcas</label>
+    </div>
+  </div>
+  
+  <div class="col-md-4 mb-2">
+    <div class="form-floating">
+      <select name="idproducto" id="idproducto" class="form-select" required>
+        <option value="" selected disabled>Seleccione</option>
+        <option value="Asc">Mayor a Menor</option>
+        <option value="Desc">Menor a Mayor</option>
+
+      </select>
+      <label for="form-label">id</label>
     </div>
   </div>
 
@@ -16,19 +28,6 @@
       <label for="form-label">Producto</label>
     </div>
   </div>
-  
-  <div class="col-md-4 mb-2">
-    <div class="form-floating">
-      <select name="idproducto" id="idproducto" class="form-select" required>
-        <option value="" selected disabled>Seleccione</option>
-        <option value="">Mayor a Menor</option>
-        <option value="">Menor a Mayor</option>
-
-      </select>
-      <label for="form-label">id</label>
-    </div>
-  </div>
-
 </div>
 
 <div class="table-responsive">

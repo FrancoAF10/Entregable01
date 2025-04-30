@@ -77,7 +77,7 @@
       event.preventDefault();
       Swal.fire({
         title:'Vehículos',
-        text:'¿Está seuro de ELIMINAR?',
+        text:'¿Está seguro de ELIMINAR?',
         icon:'question',
         footer:'SENATI ING. SOFTWARE',
         confirmButtonText:'Aceptar',
@@ -86,7 +86,7 @@
         cancelButtonText:'cancelar'
       }).then((result)=>{
         if(result.isConfirmed){
-          Window.location.href=event.target.getAttribute("href")
+          window.location.href=event.target.getAttribute("href")
         }
       })//then()
     })//addEventListener

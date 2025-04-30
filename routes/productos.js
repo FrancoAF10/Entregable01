@@ -52,4 +52,14 @@ router.post('/create',async(req,res)=>{
     console.log(error)
   }
 })
+
+//Para eliminar
+router.get('/delete/:id',async(req,res)=>{
+  try{
+    const resultado=await db.query('DELETE FROM PRODUCTOS WHERE idproducto=?',[req.params.id])
+    res.redirect('/')
+  }catch(error){
+    console.log(error)
+  }
+})
 module.exports=router

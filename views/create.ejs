@@ -1,6 +1,6 @@
 <%- include('./partials/header') %>
 
-<form action="/create" id="formulario-registrar" autocomplete="off" method="post">
+<form action="/create" id="formulario-registrar" autocomplete="off" method="post" enctype="multipart/form-data">
     <div class="card mt-5">
 
         <div class="card-header"><strong>Registrar Producto</strong></div>
@@ -68,7 +68,7 @@
 
                 <div class="col-md-6 mb-2">
                     <div class="form-floating">
-                        <input type="date" id="fechaRegistro"  name="fechaRegistro" class="form-control" placeholder="echa Registro" required> 
+                        <input type="date" id="fechaRegistro"  name="fechaRegistro" class="form-control" placeholder="Fecha Registro" required> 
                         <label for="form-label">Fecha Registro</label>
                     </div>
                 </div>
@@ -89,5 +89,42 @@
             </div>
     </div>
 </form>
-
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const categoria = document.getElementById("categoria");
+        const subcategoria = document.getElementById("subcategoria");
+        const marca = document.getElementById("marca") || document.getElementById("marcas"); 
+    
+        // Para cargar subcategorias cuando cambia la categoría
+        categoria?.addEventListener("change", async () => {
+            const categoriaId = categoria.value;
+            const res = await fetch(`/subcategorias/${categoriaId}`);
+            const subcategorias = await res.json();
+    
+            subcategoria.innerHTML = '<option value="" disabled selected>Seleccione</option>';
+            marca.innerHTML = '<option value="" disabled selected>Seleccione</option>'; 
+    
+            subcategorias.forEach(sc => {
+                const opt = document.createElement("option");
+                opt.value = sc.idsubcategoria;
+                opt.textContent = sc.subcategoria;
+                subcategoria.appendChild(opt);
+            });
+        });
+    
+        subcategoria?.addEventListener("change", async () => {
+            const subcategoriaId = subcategoria.value;
+            const res = await fetch(`/marcas/${subcategoriaId}`);
+            const marcas = await res.json();
+    
+            marca.innerHTML = '<option value="" disabled selected>Seleccione</option>';
+            marcas.forEach(m => {
+                const opt = document.createElement("option");
+                opt.value = m.idmarca;
+                opt.textContent = m.marca;
+                marca.appendChild(opt);
+            });
+        });
+    });
+    </script>
 <%- include('./partials/footer') %>

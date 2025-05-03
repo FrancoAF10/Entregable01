@@ -1,0 +1,69 @@
+<%- include('./partials/header') %>
+
+<div class="table-responsive mt-5">
+  <table class="table table-bordered table-striped w-100">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CATEGORIA</th>
+        <th>SUBCATEGORIA</th>
+        <th>MARCA</th>
+        <th>PRECIO</th>
+        <th>MODELO</th>
+        <th>FECHA REGISTRO</th>
+        <th>FOTOGRAFIA</th>
+        <th>ACCIONES</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% productos.forEach(producto => { %>
+        <tr>
+          <td><%= producto.idproducto %></td>
+          <td><%= producto.categoria %></td>
+          <td><%= producto.subcategoria%></td>
+          <td><%= producto.marca%></td>
+          <td><%= producto.precio %></td>
+          <td><%= producto.modelo %></td>
+          <td><%= producto.fechaRegistro.toISOString().split('T')[0] %></td>
+          <td>
+            <% if (producto.fotografia) { %>
+              <img src="/uploads/<%= producto.fotografia %>" alt="Foto" width="80">
+            <% } %>
+          </td>
+          <td>
+            <a href="/edit/<%= producto.idproducto %>" class="btn btn-sm btn-info">Editar</a>
+            <a href="/delete/<%= producto.idproducto %>" class="btn btn-sm btn-danger delete">Eliminar</a>
+
+          </td>
+        </tr>
+      <%}) %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded",()=>{
+    const enlacesEliminar=document.querySelectorAll(".delete");
+    enlacesEliminar.forEach((enlace) => {
+    enlace.addEventListener("click",(event)=>{
+      event.preventDefault();
+      Swal.fire({
+        title:'PRODUCTO',
+        text:'¿Está seguro de ELIMINAR?',
+        icon:'question',
+        footer:'SENATI ING. SOFTWARE',
+        confirmButtonText:'Aceptar',
+        confirmButtonColor:'#2980b9',
+        showCancelButton:true,
+        cancelButtonText:'cancelar'
+      }).then((result)=>{
+        if(result.isConfirmed){
+          window.location.href=event.target.getAttribute("href")
+        }
+      })//then()
+    })//addEventListener
+  })//forEach
+});//DOMCDontentLoaded
+</script>
+<%- include('./partials/footer') %>
